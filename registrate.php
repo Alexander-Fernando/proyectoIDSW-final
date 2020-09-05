@@ -32,6 +32,7 @@
                 echo 'Error: '. $e.getMessage();
             }
             
+            
             //REALIZANDO Y EJECUTANDO LA PETICIÓN A LA BASE DE DATOS
             $peticion = $conexion->prepare('SELECT * FROM usuarios WHERE usuario= :usuario LIMIT 1');
             $peticion->execute(array(':usuario'=> $usuario));

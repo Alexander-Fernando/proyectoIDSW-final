@@ -4,6 +4,7 @@
         header('Location: index.php');
     }
 
+
     $errores = '';
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $usuario = filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING);
@@ -21,13 +22,13 @@
 
         }
 
+
         $peticion = $conexion->prepare('SELECT * FROM usuarios WHERE usuario = :usuario AND pass = :contra');
         $peticion->execute(array(':usuario' => $usuario, ':contra' => $password));
 
         $resultadoPeticion = $peticion->fetch();
 
 
-        
         if($resultadoPeticion !== false){
             $_SESSION['usuario'] = $usuario;
             header('Location: index.php');
