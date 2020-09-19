@@ -17,6 +17,7 @@
         <?php };?>
 
 
+
         <!--SECCIÓN DE LOS PRODUCTOS-->
         <div class="row">
 
@@ -35,6 +36,7 @@
 
                 <!-- PRIMER PRODUCTO-->
                 <div class="col-12 col-sm-6 col-lg-3">
+
                     <div class="card">
 
                         <img 
@@ -49,8 +51,9 @@
 
                         >
 
+                        
                         <!--SECCIÓN PARA LA INFORMACIÓN DEL PRODUCTO-->
-                        <div class="card-body">
+                        <div class="card-body  productos" >
                             <span><?php echo $producto['Nombre'];?></span>
                             <h5 class="card-title">S/<?php echo $producto['Precio'];?></h5>
                             <p class="card-text"><img src="imagenes/estrellas.png" alt=""></p>

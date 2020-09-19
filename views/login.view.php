@@ -26,6 +26,7 @@
                 <i class="submit-btn fa fa-arrow-right" onclick="login.submit()"></i>
             </div>
 
+            
             <!--MOTRANDO EN CASO EXISTA UN ERROR AL LLENAR LOS CAMPOS-->
             <?php if(!empty($errores)):?>
                 <div>

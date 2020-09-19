@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-09-2020 a las 08:55:15
+-- Tiempo de generación: 19-09-2020 a las 05:03:55
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -32,19 +32,17 @@ CREATE TABLE `tbldetalleventa` (
   `IDVENTA` int(11) DEFAULT NULL,
   `IDPRODUCTO` int(11) DEFAULT NULL,
   `PRECIOUNITARIO` decimal(20,2) DEFAULT NULL,
-  `CANTIDAD` int(11) DEFAULT NULL,
-  `DESCARGADO` int(1) DEFAULT NULL
+  `CANTIDAD` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbldetalleventa`
 --
 
-INSERT INTO `tbldetalleventa` (`ID`, `IDVENTA`, `IDPRODUCTO`, `PRECIOUNITARIO`, `CANTIDAD`, `DESCARGADO`) VALUES
-(1, 1, 3, '1000.00', 1, 0),
-(2, 5, 2, '429.00', 1, 0),
-(3, 5, 3, '299.00', 1, 0),
-(4, 5, 2, '429.00', 1, 0);
+INSERT INTO `tbldetalleventa` (`ID`, `IDVENTA`, `IDPRODUCTO`, `PRECIOUNITARIO`, `CANTIDAD`) VALUES
+(19, 15, 2, '429.00', 1),
+(20, 15, 4, '39.90', 1),
+(21, 15, 1, '300.00', 1);
 
 -- --------------------------------------------------------
 
@@ -83,11 +81,9 @@ INSERT INTO `tblproductos` (`ID`, `Nombre`, `Precio`, `Descripcion`, `Imagen`) V
 CREATE TABLE `tblventas` (
   `ID` int(11) NOT NULL,
   `ClaveTransaccion` varchar(250) NOT NULL DEFAULT '0',
-  `PaypalDatos` text NOT NULL DEFAULT '0',
   `Fecha` datetime(6) NOT NULL,
   `Correo` varchar(500) NOT NULL DEFAULT '0',
   `Total` decimal(60,2) NOT NULL DEFAULT 0.00,
-  `status` varchar(200) NOT NULL DEFAULT '0',
   `Nombres` varchar(100) NOT NULL DEFAULT '',
   `Direccion` varchar(100) NOT NULL DEFAULT '',
   `Dni` int(10) NOT NULL DEFAULT 0
@@ -97,12 +93,8 @@ CREATE TABLE `tblventas` (
 -- Volcado de datos para la tabla `tblventas`
 --
 
-INSERT INTO `tblventas` (`ID`, `ClaveTransaccion`, `PaypalDatos`, `Fecha`, `Correo`, `Total`, `status`, `Nombres`, `Direccion`, `Dni`) VALUES
-(1, '12345678910', '0', '2020-09-01 07:36:14.000000', 'alexander.glzprd@hotmail.com', '700.00', 'pendiente', 'Alexander Fernando', 'villa el salvador', 1234567),
-(2, '12345678911', '', '2020-09-10 07:42:17.000000', 'alexander.glzprd@hotmail.com', '800.00', 'pendiente', 'Francisco Fernando Alexander', 'San juan de miraflores', 72932066),
-(3, '12345678911', '', '2020-09-10 07:42:17.000000', 'alexander.glzprd@hotmail.com', '800.00', 'pendiente', 'Francisco Fernando Alexander', 'San juan de miraflores', 72932066),
-(4, 'nvudvr94acqkoev0h3i4julj5r', '', '2020-09-01 08:02:42.000000', 'otrocorreo@gmail.com', '10000.00', 'pendiente', 'Angie Nayeli Gonzales Pardo', 'San juan de miraflores', 72932066),
-(5, 's5hpove07frb6qpaf0d4p3h822', '', '2020-09-05 00:13:49.000000', 'asd@awe', '1157.00', 'pendiente', 'asfa', 'sfasda', 0);
+INSERT INTO `tblventas` (`ID`, `ClaveTransaccion`, `Fecha`, `Correo`, `Total`, `Nombres`, `Direccion`, `Dni`) VALUES
+(15, 'k7fj04n6926f7bupcos4406fs4', '2020-09-18 19:19:27.000000', 'otrocorreo@hotmail.com', '768.90', 'ALVARADO PARDO FRANK', 'ANGELES Y ALAMOS', 12341234);
 
 -- --------------------------------------------------------
 
@@ -166,7 +158,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `tbldetalleventa`
 --
 ALTER TABLE `tbldetalleventa`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproductos`
@@ -178,7 +170,7 @@ ALTER TABLE `tblproductos`
 -- AUTO_INCREMENT de la tabla `tblventas`
 --
 ALTER TABLE `tblventas`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

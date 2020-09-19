@@ -2,14 +2,13 @@
     session_start();
     include 'carrito.php';
     include 'templates/cabecera.php';
-   
     
 ?>
 
 <?php
 
     $totalPago = 0;
-    $SID = session_id();
+    $SID = session_id(); //DEVUELVE UNA CLAVE DE LA SESIÓN - CLAVE QUE GENERA LA SESIÓN CARRITO
     $Correo = $_POST['email'];
     $Nombres = $_POST['nombres'];
     $Direccion = $_POST['direccion'];
@@ -24,8 +23,8 @@
         
 
         $conexion = new PDO('mysql:host=localhost; dbname=proyectoidsw','root', '' ); 
-        $sentencia = $conexion->prepare("INSERT INTO `tblventas` (`ID`, `ClaveTransaccion`, `PaypalDatos`, `Fecha`, `Correo`, `Total`, `status`, `Nombres`, `Direccion`, `Dni`)
-                                                     VALUES (NULL, :ClaveTransaccion, '', NOW(), :Correo, :Total, 'pendiente', :Nombres, :Direccion, :Dni);");
+        $sentencia = $conexion->prepare("INSERT INTO `tblventas` (`ID`, `ClaveTransaccion`, `PaypalDatos`, `Fecha`, `Correo`, `Total`, `Nombres`, `Direccion`, `Dni`)
+                                                     VALUES (NULL, :ClaveTransaccion, '', NOW(), :Correo, :Total, :Nombres, :Direccion, :Dni);");
         
         
         $sentencia->bindParam(":ClaveTransaccion", $SID);
@@ -44,8 +43,8 @@
 
             //INSERTANDO INFORMACIÓN DE LOS PRODUCTOS A LA TABLA 
             $sentencia = $conexion->prepare("INSERT INTO `tbldetalleventa` 
-                                (`ID`, `IDVENTA`, `IDPRODUCTO`, `PRECIOUNITARIO`, `CANTIDAD`, `DESCARGADO`) 
-                        VALUES (NULL, :IDVENTA, :IDPRODUCTO, :PRECIOUNITARIO, :CANTIDAD, '0');");
+                                (`ID`, `IDVENTA`, `IDPRODUCTO`, `PRECIOUNITARIO`, `CANTIDAD`) 
+                        VALUES (NULL, :IDVENTA, :IDPRODUCTO, :PRECIOUNITARIO, :CANTIDAD);");
 
             $sentencia->bindParam(":IDVENTA", $idVenta);
             $sentencia->bindParam(":IDPRODUCTO", $producto['ID']);
@@ -55,18 +54,18 @@
             $sentencia->execute();
         
         }
-        echo $totalPago;
+        //echo $totalPago;
         
     }
 
 
 ?>
 
+<div class="alert alert-success my-4" role="alert">
+    <strong>MUCHAS GRACIAS!</strong> SU COMPRA SE HA REALIZADO CON ÉXITO
+</div>
 
-
-
-
-
+<a href="ReporteComprasPDF.php"><button type="button" class="btn btn-info my-4 px-4">DESCARGAR REPORTE DE COMPRAS</button></a>
 
 
 

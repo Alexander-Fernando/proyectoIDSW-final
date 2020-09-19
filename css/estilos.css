@@ -9,7 +9,7 @@
 body {
     font-size: 16px;
     font-family: 'Raleway', sans-serif;
-    background: black;
+    background: #0A0E27;
     color: #fff;
 }
 
@@ -161,3 +161,4 @@ a:hover {
     margin-top: 30px;
     border-radius: 7px 7px 7px 7px;
 }
+

@@ -7,7 +7,9 @@
     if(isset($_POST['btnAccion'])){
 
         switch($_POST['btnAccion']){
+
             case 'Agregar': 
+
 
 
                 //validando el ID
@@ -18,6 +20,7 @@
                     $mensaje .= "ID NO VÁLIDO".$ID.'<br>';
                     break;
                 }
+
 
                 //validando el nombre
                 if(is_string($_POST['nombre'])){
@@ -55,6 +58,7 @@
                         'CANTIDAD' => $CANTIDAD,
                         'PRECIO' => $PRECIO
                     );
+
                     $_SESSION['CARRITO'][0] = $producto;
 
                     $mensaje = "Producto agregado al carrito.....";
@@ -77,6 +81,8 @@
 
 
             break;
+            
+
             
             case 'Eliminar':
                 if(is_numeric($_POST['id'])){
