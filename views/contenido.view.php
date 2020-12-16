@@ -1,27 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--PARA CARGAR LAS FUENTES ESPECIALES--->
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/estilos.css">
-    <title>Contenedor</title>
-</head>
-<body>
-    <div class="contenedor">
-        <h1 class="titulo">PÁGINA PRINCIPAL - IDSW GRUPO 06</h1>
-        <a href="cerrar.php">Cerrar Sesion</a>
-        <hr class="border">
-        <div class="contenido">
-            <article>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores laudantium minus possimus velit laborum, a sit! Similique cumque, quaerat, distinctio veritatis, alias tempore repellat aspernatur laudantium omnis repudiandae modi perspiciatis tempora? Rem, obcaecati consequuntur.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius aperiam illo magnam cum neque officiis culpa quia iste sit quibusdam ducimus ex quasi voluptatum expedita sequi fugiat dignissimos nam nisi officia minus, modi nobis voluptatem! Optio commodi labore voluptas nulla, perspiciatis corrupti, ducimus cupiditate dignissimos debitis impedit, officia tempora quo.</p>
+<?php
+    include 'carrito.php';
+    include 'templates/cabecera.php';
+?>
 
-            </article>
+
+
+        <br>
+
+        <?php if($mensaje != ''){  ?>  
+
+            <div class="alert alert-success "> 
+                <?php  echo $mensaje; ?>
+                <a href="mostrarCarrito.php" class="ml-3 badge badge-success">VER CARRITO </a>
+            </div>
+       
+        <?php };?>
+
+
+
+        <!--SECCIÓN DE LOS PRODUCTOS-->
+        <div class="row">
+
+
+            <!-- REALIZANDO PETICIÓN PARA OBTENER INFORMACIÓN DE LOS PRODUCTOS DE LA BD-->
+            <?php 
+                $conexion = new PDO('mysql:host=localhost; dbname=proyectoidsw','root', '' ); 
+                $info = $conexion->prepare("SELECT * FROM tblproductos ");
+                $info->execute();
+                $listaProductos=$info->fetchAll(PDO::FETCH_ASSOC);
+                //print_r($listaProductos);
+            ?>
+
+
+            <?php  foreach($listaProductos as $producto){ ?>
+
+                <!-- PRIMER PRODUCTO-->
+                <div class="col-12 col-sm-6 col-lg-3">
+
+                    <div class="card">
+
+                        <img 
+                            title="<?php echo $producto['Nombre'];?>"
+                            alt="<?php echo $producto['Nombre'];?>"
+                            src="<?php echo $producto['Imagen'];?>" 
+                            class="card-img-top"
+                            data-toggle="popover"
+                            data-trigger="hover"
+                            data-content="<?php echo $producto['Descripcion'];?>" 
+                            height="317px";
+
+                        >
+
+                        
+                        <!--SECCIÓN PARA LA INFORMACIÓN DEL PRODUCTO-->
+                        <div class="card-body  productos" >
+                            <span><?php echo $producto['Nombre'];?></span>
+                            <h5 class="card-title">S/<?php echo $producto['Precio'];?></h5>
+                            <p class="card-text"><img src="imagenes/estrellas.png" alt=""></p>
+
+                            <!-- FROMULARIO PARA OBTENER LOS VALORES E INSERTARLOS EN EL CARRITO DE COMRPAS-->
+                            <form action="" method="post">
+                                <input type="hidden" name="id" id="id" value="<?php echo  $producto['ID'];?>">
+                                <input type="hidden" name="nombre" id="nombre" value="<?php echo $producto['Nombre'];?>">
+                                <input type="hidden" name="precio" id="precio" Value="<?php echo $producto['Precio'];?>">
+                                <input type="hidden" name="cantidad" id="cantidad" value="<?php echo  1;?>">
+                                <button name="btnAccion" value="Agregar" class="btn btn-outline-dark" type="submit">AGREGAR AL CARRITO</button>
+                            </form>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            <?php }?>
+
+
+
+            
         </div>
+
     </div>
     
-</body>
-</html>
+    <!-- SCRIPT PARA EL EFECTO POPOVER-->
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        });
+    </script>
+           
+<?php
+    include 'templates/pie.php';
+?>
